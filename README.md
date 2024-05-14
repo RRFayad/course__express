@@ -29,4 +29,23 @@ We are gonna use github strategy to implement passport
 
 ### Implementing the Github Strategy
 
--
+Steps:
+
+1. Install dependencies
+
+   - npm install passport
+   - npm install passport-github
+
+2. Config the app in Github
+
+   - The authorization callback URL must match with our route
+
+     - We will update it manually when in production
+
+     * Saved the Id and Secret in a .env file
+
+3. Require
+   - both in the app
+   - passport in the route file
+
+- Stopped at 12:07
