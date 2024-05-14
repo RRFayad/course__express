@@ -26,3 +26,7 @@ We are gonna use github strategy to implement passport
   - Github validates the secret and token, so send the requested data to the app
 
   - These are just concepts, passport strategies handle this
+
+### Implementing the Github Strategy
+
+-
