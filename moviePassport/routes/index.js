@@ -17,8 +17,9 @@ router.use((req, res, next) => {
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
+  console.log(req.user);
   request.get(nowPlayingUrl, (error, response, movieData) => {
-    console.log(movieData);
+    // console.log(movieData);
     const parsedData = JSON.parse(movieData);
     // res.json(parsedData)
     res.render("index", {
@@ -27,7 +28,17 @@ router.get("/", function (req, res, next) {
   });
 });
 
+//==================Passport Related Routes======================//
 router.get("/login", passport.authenticate("github"));
+
+router.get(
+  "/auth",
+  passport.authenticate("github", {
+    successRedirect: "/",
+    failureRedirect: "/loginFailed",
+  })
+);
+//========================================//
 
 router.get("/movie/:id", (req, res, next) => {
   const movieId = req.params.id;

@@ -7,6 +7,7 @@ var logger = require("morgan");
 require("dotenv").config({ path: "../.env" });
 
 //===============PASSPORT FILES=================//
+const session = require("express-session"); // It's not part of passport, but we just installed it for it
 const passport = require("passport");
 const GitHubStrategy = require("passport-github").Strategy;
 //==============================================//
@@ -17,6 +18,14 @@ const helmet = require("helmet");
 app.use(helmet());
 
 //===============PASSPORT CONFIG=================//
+app.use(
+  session({
+    secret: "Express Course Secret",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+app.use(passport.session());
 passport.use(
   new GitHubStrategy(
     {
@@ -25,10 +34,17 @@ passport.use(
       callbackURL: "http://localhost:3005/auth",
     },
     function (accessToken, refreshToken, profile, cb) {
-      console.log(profile);
+      // console.log(accessToken, refreshToken);
+      return cb(null, profile);
     }
   )
 );
+passport.serializeUser((user, cb) => {
+  cb(null, user);
+});
+passport.deserializeUser((user, cb) => {
+  cb(null, user);
+});
 //==============================================//
 
 // view engine setup

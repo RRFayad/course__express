@@ -34,7 +34,9 @@ Steps:
 1. Install dependencies
 
    - npm install passport
+     - Passport in an athenticationt middleware
    - npm install passport-github
+     - Is the specific strategy to connect Passport middleware with github auth configuration
 
 2. Config the app in Github
 
@@ -45,7 +47,20 @@ Steps:
      * Saved the Id and Secret in a .env file
 
 3. Set Up the Authentication
+
    1. In the app:
-   - Check the passport Files and Passport config
+
+   - Check the passport Files (created the github Strategy class) and Passport config
+
    2. In the Routes
+
    - Created the login route (which called the passport authenticate)
+
+4. Set Up Session
+
+- Remembering, session is like the cookie, but session is stored in the server (in the client we only have a session id)
+- Passport work with sessions, guaranteeing that the credential are used only once. So, the session is the identifier
+- Steps:
+  1.  install express-session
+  2.  Add the sessoin config (check app.js)
+  3.  Implement the serializeUser() and deserializeUser()
