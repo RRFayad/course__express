@@ -27,7 +27,7 @@ router.get("/", function (req, res, next) {
   });
 });
 
-router.get("/login");
+router.get("/login", passport.authenticate("github"));
 
 router.get("/movie/:id", (req, res, next) => {
   const movieId = req.params.id;

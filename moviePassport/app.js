@@ -4,17 +4,32 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
+require("dotenv").config({ path: "../.env" });
+
 //===============PASSPORT FILES=================//
-
 const passport = require("passport");
-const GithubStrategy = require("passport-github").Strategy;
-
+const GitHubStrategy = require("passport-github").Strategy;
 //==============================================//
 var indexRouter = require("./routes/index");
 
 var app = express();
 const helmet = require("helmet");
 app.use(helmet());
+
+//===============PASSPORT CONFIG=================//
+passport.use(
+  new GitHubStrategy(
+    {
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: "http://localhost:3005/auth",
+    },
+    function (accessToken, refreshToken, profile, cb) {
+      console.log(profile);
+    }
+  )
+);
+//==============================================//
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

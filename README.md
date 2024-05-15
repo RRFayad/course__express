@@ -44,8 +44,8 @@ Steps:
 
      * Saved the Id and Secret in a .env file
 
-3. Require
-   - both in the app
-   - passport in the route file
-
-- Stopped at 12:07
+3. Set Up the Authentication
+   1. In the app:
+   - Check the passport Files and Passport config
+   2. In the Routes
+   - Created the login route (which called the passport authenticate)
